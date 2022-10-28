@@ -18,7 +18,7 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal --
+-- Normal 
 -- Better window navigation
 -- 分屏快捷键
 keymap("n", "<leader>v", ":vsp<CR>", opts)
