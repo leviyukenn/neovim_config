@@ -50,8 +50,8 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- 翻页
-keymap("n", "<C-j>", "4j", opts)
-keymap("n", "<C-k>", "4k", opts)
+-- keymap("n", "<C-j>", "4j", opts)
+-- keymap("n", "<C-k>", "4k", opts)
 keymap("n", "<C-d>", "9j", opts)
 keymap("n", "<C-u>", "9k", opts)
 
@@ -91,7 +91,7 @@ keymap("v", "p", '"_dP', opts)
 -- Terminal --
 -- Better terminal navigation
 keymap("t", "<Esc>", "<C-\\><C-n>", term_opts)
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+-- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+-- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+-- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+-- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)

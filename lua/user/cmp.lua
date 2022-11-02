@@ -60,7 +60,8 @@ cmp.setup {
     -- 补全提示列表中的Docs中scroll
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    -- 显示补全提示列表
+    ["<C-s>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     -- 关闭补全提示列表
     ["<C-e>"] = cmp.mapping {
@@ -112,6 +113,8 @@ cmp.setup {
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       vim_item.menu = ({
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[NVIM_LUA]",
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
@@ -120,9 +123,11 @@ cmp.setup {
     end,
   },
 
-  -- 补全提示列表中显示的优先顺序 luasnip > buffer > path
+  -- 补全提示列表中显示的优先顺序 nvim_lsp > nvim_lua> luasnip > buffer > path
   -- 下载了新的source插件后，需要在此引入
   sources = {
+    { name = "nvim_lsp" },
+    { name = "nvim_lua" },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
