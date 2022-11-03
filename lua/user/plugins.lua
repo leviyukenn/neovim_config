@@ -81,7 +81,8 @@ return packer.startup(function(use)
   use "williamboman/mason.nvim" -- simple to use language server installer
   use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
 
-
+  -- Telescope
+  use "nvim-telescope/telescope.nvim"
 
 
   -- Automatically set up your configuration after cloning packer.nvim
