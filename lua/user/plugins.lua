@@ -84,6 +84,14 @@ return packer.startup(function(use)
   -- Telescope
   use "nvim-telescope/telescope.nvim"
 
+  -- treesitter （新增）
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  -- treesitter插件 rainbow
+  use "p00f/nvim-ts-rainbow"
+
+  -- lsp cmp补全ui增强
+  use("onsails/lspkind-nvim")
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -99,3 +99,177 @@ keymap("t", "<Esc>", "<C-\\><C-n>", term_opts)
 -- Telescope
 keymap("n", "<C-p>", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
 keymap("n", "<C-f>", "<cmd>Telescope live_grep<cr>", opts)
+
+-- Treesitter
+-- 全文缩进并跳回原来光标所在处
+keymap("n", "<leader>f", "gg=G<C-o>", opts)
+-- 折叠代码
+keymap('n', 'zz', ':foldclose<CR>', opts)
+-- 展开代码
+keymap('n', 'Z', ':foldopen<CR>', opts)
+
+-- 插件快捷键
+local pluginKeys = {}
+-- lsp 回调函数快捷键设置
+pluginKeys.mapLSP = function(bufnr)
+
+  local lspOpts = { noremap = true, silent = true }
+  local lspKeymap = vim.api.nvim_buf_set_keymap
+  -- gl 弹出行内浮动窗口
+  lspKeymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", lspOpts)
+  -- 下一个diagnostic
+  lspKeymap(bufnr, "n", "gj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", lspOpts)
+  -- 上一个diagnostic
+  lspKeymap(bufnr, "n", "gk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", lspOpts)
+  -- K 悬停（弹出text document)显示提示
+  lspKeymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lspOpts)
+  -- 查找引用, 和gd相对
+  lspKeymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", lspOpts)
+  -- 跳转变量定义
+  lspKeymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", lspOpts)
+  lspKeymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", lspOpts)
+  lspKeymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", lspOpts)
+
+  -- 修改变量名
+  lspKeymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", lspOpts)
+
+  -- code action
+  lspKeymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", lspOpts)
+
+  lspKeymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", lspOpts)
+  lspKeymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", lspOpts)
+  lspKeymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", lspOpts)
+  lspKeymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", lspOpts)
+  lspKeymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", lspOpts)
+end
+
+-- cmp补全提示快捷键
+pluginKeys.mapCmp = function(cmp, luasnip, check_backspace)
+
+  return {
+    -- 在补全提示列表里选择上一条
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
+    -- 在补全提示列表里选择下一条
+    ["<C-j>"] = cmp.mapping.select_next_item(),
+    -- 补全提示列表中的Docs中scroll
+    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+    -- 显示补全提示列表
+    ["<C-,>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    -- 关闭补全提示列表
+    ["<C-.>"] = cmp.mapping {
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    },
+    -- Accept currently selected item. If none selected, `select` first item.
+    -- Set `select` to `false` to only confirm explicitly selected items.
+    -- 选中补全提示列表中的一项
+    ["<CR>"] = cmp.mapping.confirm { select = true },
+
+    -- 增强Tab功能，使之成为Super Tab
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expandable() then
+        luasnip.expand()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif check_backspace() then
+        fallback()
+      else
+        fallback()
+      end
+    end, {
+        "i",
+        "s",
+      }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, {
+        "i",
+        "s",
+      }),
+  }
+end
+
+pluginKeys.mapTelescope = function(actions)
+
+  return {
+    -- Insert模式下
+    i = {
+      -- 翻阅搜索历史
+      ["<C-n>"] = actions.cycle_history_next,
+      ["<C-p>"] = actions.cycle_history_prev,
+
+      -- 直接从Insert模式翻阅上/下一条
+      ["<C-j>"] = actions.move_selection_next,
+      ["<C-k>"] = actions.move_selection_previous,
+
+      -- 关闭
+      ["<C-c>"] = actions.close,
+
+      ["<Down>"] = actions.move_selection_next,
+      ["<Up>"] = actions.move_selection_previous,
+
+      ["<CR>"] = actions.select_default,
+      ["<C-x>"] = actions.select_horizontal,
+      ["<C-v>"] = actions.select_vertical,
+      ["<C-t>"] = actions.select_tab,
+
+      ["<C-u>"] = actions.preview_scrolling_up,
+      ["<C-d>"] = actions.preview_scrolling_down,
+
+      ["<PageUp>"] = actions.results_scrolling_up,
+      ["<PageDown>"] = actions.results_scrolling_down,
+
+      ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+      ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+      ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+      ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+      ["<C-l>"] = actions.complete_tag,
+      ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+    },
+
+    -- Normal模式下
+    n = {
+      ["<esc>"] = actions.close,
+      ["<CR>"] = actions.select_default,
+      ["<C-x>"] = actions.select_horizontal,
+      ["<C-v>"] = actions.select_vertical,
+["<C-t>"] = actions.select_tab,
+
+      ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+      ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+      ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+      ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+
+      ["j"] = actions.move_selection_next,
+      ["k"] = actions.move_selection_previous,
+      ["H"] = actions.move_to_top,
+      ["M"] = actions.move_to_middle,
+      ["L"] = actions.move_to_bottom,
+
+      ["<Down>"] = actions.move_selection_next,
+      ["<Up>"] = actions.move_selection_previous,
+      ["gg"] = actions.move_to_top,
+      ["G"] = actions.move_to_bottom,
+
+      ["<C-u>"] = actions.preview_scrolling_up,
+      ["<C-d>"] = actions.preview_scrolling_down,
+
+      ["<PageUp>"] = actions.results_scrolling_up,
+      ["<PageDown>"] = actions.results_scrolling_down,
+
+      ["?"] = actions.which_key,
+    },
+  }
+end
+
+return pluginKeys
