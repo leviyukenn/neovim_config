@@ -92,6 +92,9 @@ return packer.startup(function(use)
   -- lsp cmp补全ui增强
   use("onsails/lspkind-nvim")
 
+  -- indent blank line
+  use("lukas-reineke/indent-blankline.nvim")
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
