@@ -89,11 +89,15 @@ return packer.startup(function(use)
   -- treesitter插件 rainbow
   use "p00f/nvim-ts-rainbow"
 
-  -- lsp cmp补全ui增强
+  -- lsp cmp补全提示列表UI增强
   use("onsails/lspkind-nvim")
 
   -- indent blank line
   use("lukas-reineke/indent-blankline.nvim")
+
+
+  -- lspsaga lsp诊断UI增强
+  use("glepnir/lspsaga.nvim")
 
 
   -- Automatically set up your configuration after cloning packer.nvim

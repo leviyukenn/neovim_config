@@ -115,27 +115,39 @@ pluginKeys.mapLSP = function(bufnr)
 
   local lspOpts = { noremap = true, silent = true }
   local lspKeymap = vim.api.nvim_buf_set_keymap
+
+  -- 用lspsaga的UI代替原生nvim-lsp
+
   -- gl 弹出行内浮动窗口
-  lspKeymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", lspOpts)
+  -- lspKeymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", lspOpts)
+  lspKeymap(bufnr, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", lspOpts)
   -- 下一个diagnostic
-  lspKeymap(bufnr, "n", "gj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", lspOpts)
+  -- lspKeymap(bufnr, "n", "gj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", lspOpts)
+  lspKeymap(bufnr, "n", "gj", "<cmd>Lspsaga diagnostic_jump_next<CR>", lspOpts)
   -- 上一个diagnostic
-  lspKeymap(bufnr, "n", "gk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", lspOpts)
+  -- lspKeymap(bufnr, "n", "gk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", lspOpts)
+  lspKeymap(bufnr, "n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<CR>", lspOpts)
   -- K 悬停（弹出text document)显示提示
-  lspKeymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lspOpts)
+  -- lspKeymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lspOpts)
+  lspKeymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<CR>", lspOpts)
   -- 查找引用, 和gd相对
-  lspKeymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", lspOpts)
+  -- lspKeymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", lspOpts)
+  lspKeymap(bufnr, "n", "gr", "<cmd>Lspsaga lsp_finder<CR>", lspOpts)
   -- 跳转变量定义
-  lspKeymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", lspOpts)
-  lspKeymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", lspOpts)
-  lspKeymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", lspOpts)
+  -- lspKeymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", lspOpts)
+  lspKeymap(bufnr, "n", "gd", "<cmd>Lspsaga peek_definition<CR>", lspOpts)
 
   -- 修改变量名
-  lspKeymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", lspOpts)
+  -- lspKeymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", lspOpts)
+  lspKeymap(bufnr, "n", "<leader>rn", "<cmd>Lspsaga rename<CR>", lspOpts)
 
   -- code action
-  lspKeymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", lspOpts)
+  -- lspKeymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", lspOpts)
+  lspKeymap(bufnr, "n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", lspOpts)
 
+  -- 以下比较少用
+  lspKeymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", lspOpts)
+  lspKeymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", lspOpts)
   lspKeymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", lspOpts)
   lspKeymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", lspOpts)
   lspKeymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", lspOpts)
@@ -199,6 +211,7 @@ pluginKeys.mapCmp = function(cmp, luasnip, check_backspace)
   }
 end
 
+-- Telescope快捷键
 pluginKeys.mapTelescope = function(actions)
 
   return {
@@ -243,7 +256,7 @@ pluginKeys.mapTelescope = function(actions)
       ["<CR>"] = actions.select_default,
       ["<C-x>"] = actions.select_horizontal,
       ["<C-v>"] = actions.select_vertical,
-["<C-t>"] = actions.select_tab,
+      ["<C-t>"] = actions.select_tab,
 
       ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
       ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
