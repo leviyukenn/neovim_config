@@ -99,6 +99,11 @@ return packer.startup(function(use)
   -- lspsaga lsp诊断UI增强
   use("glepnir/lspsaga.nvim")
 
+  -- autopairs
+  use("windwp/nvim-autopairs")
+
+  -- auto tags
+  use("windwp/nvim-ts-autotag")
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
