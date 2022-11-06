@@ -9,8 +9,8 @@ require "user.telescope"
 require "user.treesitter"
 
 require("user.plugins-config.indent-blankline")
-
 require("user.plugins-config.autopairs")
 require("user.plugins-config.autotags")
+require("user.plugins-config.comment")
 
 

@@ -105,6 +105,10 @@ return packer.startup(function(use)
   -- auto tags
   use("windwp/nvim-ts-autotag")
 
+  -- comments
+  use "numToStr/Comment.nvim" -- Easily comment stuff
+  use 'JoosepAlviste/nvim-ts-context-commentstring' -- comment for jsx
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
