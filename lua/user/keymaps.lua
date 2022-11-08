@@ -96,9 +96,6 @@ keymap("t", "<Esc>", "<C-\\><C-n>", term_opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
--- Telescope
-keymap("n", "<C-p>", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<C-f>", "<cmd>Telescope live_grep<cr>", opts)
 
 -- Treesitter
 -- 全文缩进并跳回原来光标所在处
@@ -212,6 +209,9 @@ pluginKeys.mapCmp = function(cmp, luasnip, check_backspace)
 end
 
 -- Telescope快捷键
+keymap("n", "<C-p>", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
+keymap("n", "<C-f>", "<cmd>Telescope live_grep<cr>", opts)
+
 pluginKeys.mapTelescope = function(actions)
 
   return {
@@ -336,5 +336,38 @@ pluginKeys.gitsigns_on_attach = function(bufnr)
   map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>")
 end
 
+-- nvim-tree
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+-- 列表快捷键
+pluginKeys.nvimTreeList = { 
+  -- 打开文件或文件夹
+  { key = { "O", "<2-LeftMouse>" }, action = "system_open" },
+  { key = { "o","<CR>"}, action = "edit" },
+  -- v分屏打开文件
+  { key = "v", action = "vsplit" },
+  -- h分屏打开文件
+  { key = "h", action = "split" },
+  -- Ignore (node_modules)
+  { key = "i", action = "toggle_ignored" },
+  -- Hide (dotfiles)
+  { key = ".", action = "toggle_dotfiles" },
+  { key = "R", action = "refresh" },
+  -- 文件操作
+  { key = "a", action = "create" },
+  { key = "d", action = "remove" },
+  { key = "r", action = "rename" },
+  { key = "x", action = "cut" },
+  { key = "c", action = "copy" },
+  { key = "p", action = "paste" },
+  { key = "y", action = "copy_name" },
+  { key = "Y", action = "copy_path" },
+  { key = "gy", action = "copy_absolute_path" },
+  { key = "I", action = "toggle_file_info" },
+  { key = "n", action = "tabnew" },
+  -- 进入下一级
+  { key = { "]" }, action = "cd" },
+  -- 进入上一级
+  { key = { "[" }, action = "dir_up" },
+}
 
 return pluginKeys

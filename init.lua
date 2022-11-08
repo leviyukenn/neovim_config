@@ -1,3 +1,14 @@
+-- some nvim-tree settings
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+------------------------------------------------
+
+-- 导入各种配置文件
 require "user.options"
 require "user.keymaps"
 require "user.plugins"
@@ -13,5 +24,6 @@ require("user.plugins-config.autopairs")
 require("user.plugins-config.autotags")
 require("user.plugins-config.comment")
 require("user.plugins-config.gitsigns")
+require("user.plugins-config.nvim-tree")
 
 
