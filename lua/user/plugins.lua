@@ -48,15 +48,6 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use 'folke/tokyonight.nvim' -- tokyonight colorscheme
 
-  --nvim-tree
-  use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
-    },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
-  }
-
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
 
@@ -117,8 +108,14 @@ return packer.startup(function(use)
     },
   }
 
-  -- Git
+  -- Git signs
   use "lewis6991/gitsigns.nvim"
+
+  -- bufferline
+  use({
+    "akinsho/bufferline.nvim",
+    requires = {  "moll/vim-bbye" },
+  })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

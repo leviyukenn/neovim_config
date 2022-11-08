@@ -25,5 +25,6 @@ require("user.plugins-config.autotags")
 require("user.plugins-config.comment")
 require("user.plugins-config.gitsigns")
 require("user.plugins-config.nvim-tree")
+require("user.plugins-config.bufferline")
 
 

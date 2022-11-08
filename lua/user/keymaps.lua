@@ -166,7 +166,7 @@ pluginKeys.mapCmp = function(cmp, luasnip, check_backspace)
     -- 显示补全提示列表
     ["<C-,>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    -- 关闭补全提示列表
+    -- 关闭补全提示列表ke
     ["<C-.>"] = cmp.mapping {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
@@ -369,5 +369,18 @@ pluginKeys.nvimTreeList = {
   -- 进入上一级
   { key = { "[" }, action = "dir_up" },
 }
+
+-- "moll/vim-bbye" 关闭当前 buffer
+keymap("n", "<leader>bc", ":Bdelete!<CR>", opts)
+keymap("n", "<C-w>", ":Bdelete!<CR>", opts)
+-- 关闭左/右侧标签页
+keymap("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opts)
+keymap("n", "<leader>bl", ":BufferLineCloseRight<CR>", opts)
+-- 关闭其他标签页
+keymap("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>", opts)
+-- 关闭选中标签页
+keymap("n", "<leader>bp", ":BufferLinePickClose<CR>", opts)
+-- 关闭neovim tab（bufferline右边的数字)
+keymap("n", "<leader>tc", ":tabclose<CR>", opts)
 
 return pluginKeys
