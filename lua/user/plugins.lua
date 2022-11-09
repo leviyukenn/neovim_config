@@ -114,8 +114,15 @@ return packer.startup(function(use)
   -- bufferline
   use({
     "akinsho/bufferline.nvim",
-    requires = {  "moll/vim-bbye" },
+    requires = {  "moll/vim-bbye", 'nvim-tree/nvim-web-devicons' },
   })
+
+  -- lualine
+  use({
+    "nvim-lualine/lualine.nvim",
+    requires = { "kyazdani42/nvim-web-devicons" },
+  })
+  use("arkav/lualine-lsp-progress")
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
