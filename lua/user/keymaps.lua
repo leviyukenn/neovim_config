@@ -99,7 +99,7 @@ keymap("t", "<Esc>", "<C-\\><C-n>", term_opts)
 
 -- Treesitter
 -- 全文缩进并跳回原来光标所在处
-keymap("n", "<leader>f", "gg=G<C-o>", opts)
+-- keymap("n", "<leader>f", "gg=G<C-o>", opts)
 -- 折叠代码
 keymap('n', 'zz', ':foldclose<CR>', opts)
 -- 展开代码
@@ -151,6 +151,9 @@ pluginKeys.mapLSP = function(bufnr)
   lspKeymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", lspOpts)
   lspKeymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", lspOpts)
 end
+
+-- null_ls提供formatting
+keymap("n", "<leader>f", ":lua vim.lsp.buf.format{ async = true }<CR>", opts)
 
 -- cmp补全提示快捷键
 pluginKeys.mapCmp = function(cmp, luasnip, check_backspace)
