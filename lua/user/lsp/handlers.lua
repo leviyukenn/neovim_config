@@ -7,6 +7,7 @@ end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- 引入cmp补全
 M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 -- 定义diagnostic用的图标
@@ -22,9 +23,9 @@ M.setup = function()
 		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 	end
 
-  -- 配置diagnostic
+	-- 配置diagnostic
 	local config = {
-    -- 不在行内显示错误信息，而是按gl后显示弹窗的方式
+		-- 不在行内显示错误信息，而是按gl后显示弹窗的方式显示错误信息
 		virtual_text = false, -- disable virtual text
 		signs = {
 			active = signs, -- show signs
@@ -32,7 +33,7 @@ M.setup = function()
 		update_in_insert = true,
 		underline = true,
 		severity_sort = true,
-    -- 定义显示错误信息用的浮动窗口
+		-- 定义显示错误信息用的浮动窗口
 		float = {
 			focusable = true,
 			style = "minimal",
@@ -45,8 +46,7 @@ M.setup = function()
 
 	vim.diagnostic.config(config)
 
-
-  -- 配置悬停后显示的text document
+	-- 配置悬停后显示的text document
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		border = "rounded",
 	})
@@ -57,16 +57,17 @@ M.setup = function()
 end
 
 local function lsp_keymaps(bufnr)
-  -- 在keymaps中统一管理快捷键
-  require("user.keymaps").mapLSP(bufnr)
+	-- 在keymaps中统一管理快捷键
+	require("user.keymaps").mapLSP(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-  -- 停用tsserver自带的Formatter
+	-- 停用tsserver自带的Formatter
 	if client.name == "tsserver" then
 		client.server_capabilities.documentFormattingProvider = false
 	end
 
+	-- 停用sumneko自带的Formatter
 	if client.name == "sumneko_lua" then
 		client.server_capabilities.documentFormattingProvider = false
 	end

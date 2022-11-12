@@ -9,15 +9,15 @@ vim.opt.termguicolors = true
 ------------------------------------------------
 
 -- 导入各种配置文件
-require "user.options"
-require "user.keymaps"
-require "user.plugins"
-require "user.colorscheme"
-require "user.cmp"
+require("user.options")
+require("user.keymaps")
+require("user.plugins")
+require("user.colorscheme")
+require("user.cmp")
 -- 导入lsp文件夹中的配置入口文件init.lua
-require "user.lsp"
-require "user.telescope"
-require "user.treesitter"
+require("user.lsp")
+require("user.telescope")
+require("user.treesitter")
 
 require("user.plugins-config.indent-blankline")
 require("user.plugins-config.autopairs")
@@ -27,5 +27,5 @@ require("user.plugins-config.gitsigns")
 require("user.plugins-config.nvim-tree")
 require("user.plugins-config.bufferline")
 require("user.plugins-config.lualine")
-
-
+-- 用于给typescript添加一些utility功能，只在.ts/.tsx文件中生效
+require("user.plugins-config.typescript")

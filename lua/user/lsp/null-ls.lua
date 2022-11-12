@@ -7,6 +7,7 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local ts_code_actions = require("typescript.extensions.null-ls.code-actions")
 
 null_ls.setup({
 	debug = false,
@@ -64,6 +65,12 @@ null_ls.setup({
 		code_actions.eslint.with({
 			prefer_local = "node_modules/.bin",
 		}),
+		-- 添加typescript的code_actions
+		-- Add Missing Imports
+		-- Fix All
+		-- Organize Imports
+		-- Remove Unused
+		ts_code_actions,
 	},
 	-- #{m}: message
 	-- #{s}: source name (defaults to null-ls if not specified)
@@ -78,7 +85,7 @@ null_ls.setup({
 				buffer = bufnr,
 				callback = function()
 					-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-					vim.lsp.buf.formatting_sync()
+					vim.lsp.buf.format({ bufnr = bufnr })
 				end,
 			})
 		end
