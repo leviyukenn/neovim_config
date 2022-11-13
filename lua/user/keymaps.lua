@@ -56,7 +56,7 @@ keymap("n", "<C-d>", "9j", opts)
 keymap("n", "<C-u>", "9k", opts)
 
 -- 打开terminal
-keymap("n", "<leader>t", ":sp | terminal<CR>", opts)
+-- keymap("n", "<leader>t", ":sp | terminal<CR>", opts)
 keymap("n", "<leader>tv", ":vsp | terminal<CR>", opts)
 
 -- Increment/Decrement
@@ -391,7 +391,7 @@ pluginKeys.nvimTreeList = {
 }
 
 -- "moll/vim-bbye" 关闭当前 buffer
-keymap("n", "<leader>bc", ":Bdelete!<CR>", opts)
+-- keymap("n", "<leader>bc", ":Bdelete!<CR>", opts)
 keymap("n", "<C-w>", ":Bdelete!<CR>", opts)
 -- 关闭左/右侧标签页
 keymap("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opts)
@@ -401,6 +401,18 @@ keymap("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>", o
 -- 关闭选中标签页
 keymap("n", "<leader>bp", ":BufferLinePickClose<CR>", opts)
 -- 关闭neovim tab（bufferline右边的数字)
-keymap("n", "<leader>tc", ":tabclose<CR>", opts)
+keymap("n", "<leader>bc", ":tabclose<CR>", opts)
 
+-- 自定义 toggleterm 3个不同类型的命令行窗口
+-- <leader>ta 浮动
+-- <leader>tb 右侧
+-- <leader>tc 下方
+-- 特殊lazygit 窗口，需要安装lazygit
+-- <leader>tg lazygit
+pluginKeys.mapToggleTerm = function(toggleterm)
+	vim.keymap.set({ "n", "t" }, "<leader>t", toggleterm.toggleC)
+	vim.keymap.set({ "n", "t" }, "<leader>ta", toggleterm.toggleA)
+	vim.keymap.set({ "n", "t" }, "<leader>tb", toggleterm.toggleB)
+	vim.keymap.set({ "n", "t" }, "<leader>tg", toggleterm.toggleG)
+end
 return pluginKeys
