@@ -18,6 +18,7 @@ require("user.cmp")
 require("user.lsp")
 require("user.telescope")
 require("user.treesitter")
+require("user.autocmds")
 
 require("user.plugins-config.indent-blankline")
 require("user.plugins-config.autopairs")
