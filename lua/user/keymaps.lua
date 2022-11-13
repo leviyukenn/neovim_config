@@ -66,7 +66,13 @@ keymap("n", "-", "<C-x>", opts)
 -- 全选
 keymap("n", "<C-a>", "gg<S-v>G", opts)
 
+-- save buffer
+keymap("n", "<C-s>", ":w<CR>", opts)
+
 -- Insert --
+-- save buffer
+keymap("i", "<C-s>", "<Esc>:w<CR>", opts)
+
 -- Press jk fast to enter
 keymap("i", "jj", "<ESC>", opts)
 

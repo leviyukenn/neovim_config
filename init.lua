@@ -27,5 +27,5 @@ require("user.plugins-config.gitsigns")
 require("user.plugins-config.nvim-tree")
 require("user.plugins-config.bufferline")
 require("user.plugins-config.lualine")
--- 用于给typescript添加一些utility功能，只在.ts/.tsx文件中生效
 require("user.plugins-config.typescript")
+require("user.plugins-config.surround")

@@ -33,6 +33,7 @@ null_ls.setup({
 				"yaml",
 				"graphql",
 			},
+			-- 求项目本地依赖 prettier 和 eslint，也就是说项目目录要有 package.json 并且 npm install -D prettier eslint 安装过依赖，才成功会格式化。
 			prefer_local = "node_modules/.bin",
 		}),
 		-- rustfmt
