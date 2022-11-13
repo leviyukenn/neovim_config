@@ -74,6 +74,8 @@ return packer.startup(function(use)
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
+	-- projects(作为Telescope的插件)
+	use("ahmedkhalf/project.nvim")
 
 	-- treesitter （新增）
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -131,6 +133,10 @@ return packer.startup(function(use)
 		"kylechui/nvim-surround",
 		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
 	})
+
+	-- dashboard
+	use("glepnir/dashboard-nvim")
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
