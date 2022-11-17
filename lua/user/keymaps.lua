@@ -390,6 +390,7 @@ pluginKeys.nvimTreeList = {
 	{ key = { "[" }, action = "dir_up" },
 }
 
+-- BufferLine
 -- "moll/vim-bbye" 关闭当前 buffer
 -- keymap("n", "<leader>bc", ":Bdelete!<CR>", opts)
 keymap("n", "<C-w>", ":Bdelete!<CR>", opts)
@@ -403,6 +404,7 @@ keymap("n", "<leader>bp", ":BufferLinePickClose<CR>", opts)
 -- 关闭neovim tab（bufferline右边的数字)
 keymap("n", "<leader>bc", ":tabclose<CR>", opts)
 
+-- Toggleterm
 -- 自定义 toggleterm 3个不同类型的命令行窗口
 -- <leader>ta 浮动
 -- <leader>tb 右侧
@@ -415,4 +417,14 @@ pluginKeys.mapToggleTerm = function(toggleterm)
 	vim.keymap.set({ "n", "t" }, "<leader>tb", toggleterm.toggleB)
 	vim.keymap.set({ "n", "t" }, "<leader>tg", toggleterm.toggleG)
 end
+
+--todo-comments
+vim.keymap.set("n", "]t", function()
+	require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+	require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
 return pluginKeys
