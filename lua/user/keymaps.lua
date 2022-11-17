@@ -112,61 +112,61 @@ keymap("n", "Z", ":foldopen<CR>", opts)
 -- 插件快捷键
 local pluginKeys = {}
 -- lsp 回调函数快捷键设置
-pluginKeys.mapLSP = function(bufnr)
-	local lspOpts = { noremap = true, silent = true }
-	local lspKeymap = vim.api.nvim_buf_set_keymap
-
+pluginKeys.mapLSP = function(buf_set_keymap)
 	-- 用lspsaga的UI代替原生nvim-lsp
 
 	-- gl 弹出行内浮动窗口
-	-- lspKeymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", lspOpts)
-	lspKeymap(bufnr, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", lspOpts)
+	-- buf_set_keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>")
+	buf_set_keymap("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>")
 	-- 下一个diagnostic
-	-- lspKeymap(bufnr, "n", "gj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", lspOpts)
-	lspKeymap(bufnr, "n", "gj", "<cmd>Lspsaga diagnostic_jump_next<CR>", lspOpts)
+	-- buf_set_keymap("n", "gj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>")
+	buf_set_keymap("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 	-- 上一个diagnostic
-	-- lspKeymap(bufnr, "n", "gk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", lspOpts)
-	lspKeymap(bufnr, "n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<CR>", lspOpts)
+	-- buf_set_keymap("n", "gk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>")
+	buf_set_keymap("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 	-- K 悬停（弹出text document)显示提示
-	-- lspKeymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lspOpts)
-	lspKeymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<CR>", lspOpts)
+	-- buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+	buf_set_keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
 	-- 查找引用, 和gd相对
-	-- lspKeymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", lspOpts)
-	lspKeymap(bufnr, "n", "gr", "<cmd>Lspsaga lsp_finder<CR>", lspOpts)
+	-- buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+	buf_set_keymap("n", "gr", "<cmd>Lspsaga lsp_finder<CR>")
 	-- 跳转变量定义
-	-- lspKeymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", lspOpts)
-	lspKeymap(bufnr, "n", "gd", "<cmd>Lspsaga peek_definition<CR>", lspOpts)
+	-- buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+	buf_set_keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>")
 
 	-- 修改变量名
-	-- lspKeymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", lspOpts)
-	lspKeymap(bufnr, "n", "<leader>rn", "<cmd>Lspsaga rename<CR>", lspOpts)
+	-- buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>")
+	buf_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>")
 
 	-- code action
-	-- lspKeymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", lspOpts)
-	lspKeymap(bufnr, "n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", lspOpts)
+	-- buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>")
+	buf_set_keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
+	-- 显示所有diagnostic的list
+	buf_set_keymap("n", "<leader>ll", "<cmd>lua vim.diagnostic.setloclist()<CR>")
 	-- 以下比较少用
-	lspKeymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", lspOpts)
-	lspKeymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", lspOpts)
-	lspKeymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", lspOpts)
-	lspKeymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", lspOpts)
-	lspKeymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", lspOpts)
-	lspKeymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", lspOpts)
-	lspKeymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", lspOpts)
+	-- buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
+	buf_set_keymap("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+	buf_set_keymap("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 end
 
 -- null_ls提供formatting
 keymap("n", "<leader>f", ":lua vim.lsp.buf.format{ async = true }<CR>", opts)
 
 -- typescript 快捷键
-pluginKeys.mapTsLSP = function(bufnr)
-	local lspKeymap = vim.api.nvim_buf_set_keymap
+pluginKeys.mapTsLSP = function(buf_set_keymap)
 	-- 移除没有用到的import并重新排序
-	lspKeymap(bufnr, "n", "gs", ":TypescriptOrganizeImports<CR>", opts)
+	buf_set_keymap("n", "gs", ":TypescriptOrganizeImports<CR>")
 	-- 连带引入该文件的地方也一并修改
-	lspKeymap(bufnr, "n", "<leader>tr", ":TypescriptRenameFile<CR>", opts)
+	buf_set_keymap("n", "gR", ":TypescriptRenameFile<CR>")
 	-- 添加缺失的引入
-	lspKeymap(bufnr, "n", "gi", ":TypescriptAddMissingImports<CR>", opts)
+	buf_set_keymap("n", "gi", ":TypescriptAddMissingImports<CR>")
+	-- 删除所有未用
+	buf_set_keymap("n", "gu", ":TypescriptRemoveUnused<CR>")
+	-- Fix All
+	buf_set_keymap("n", "gf", ":TypescriptFixAll<CR>")
+	-- 跳转定义
+	buf_set_keymap("n", "gD", ":TypescriptGoToSourceDefinition<CR>")
 end
 
 -- cmp补全提示快捷键

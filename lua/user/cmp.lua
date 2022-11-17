@@ -89,7 +89,7 @@ cmp.setup({
 			-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
 			before = function(entry, vim_item)
 				local menu
-				local kind = require("lspkind").symbol_map[vim_item.kind] --.. " " .. vim_item.kind
+				-- local kind = require("lspkind").symbol_map[vim_item.kind] --.. " " .. vim_item.kind
 
 				if entry.source.name == "nvim_lsp" then
 					menu = entry.source.source.client.name
@@ -97,7 +97,7 @@ cmp.setup({
 					menu = "[" .. string.upper(entry.source.name) .. "]"
 				end
 				vim_item.menu = menu
-				vim_item.kind = kind
+				-- vim_item.kind = kind
 				return vim_item
 				-- Source 显示提示来源
 				-- vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
@@ -110,6 +110,7 @@ cmp.setup({
 	-- 下载了新的source插件后，需要在此引入
 	sources = {
 		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
 		{ name = "nvim_lua" },
 		{ name = "luasnip" },
 		{ name = "buffer" },

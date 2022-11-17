@@ -3,14 +3,28 @@ local opts = {
 	capabilities = common.capabilities,
 	flags = common.flags,
 	on_attach = function(client, bufnr)
-		-- use fixjson to format
-		-- https://github.com/rhysd/fixjson
 		common.disableFormat(client)
 		common.keyAttach(bufnr)
 	end,
 	settings = {
-		json = {
-			schemas = require("schemastore").json.schemas(),
+		css = {
+			validate = true,
+			-- tailwindcss
+			lint = {
+				unknownAtRules = "ignore",
+			},
+		},
+		less = {
+			validate = true,
+			lint = {
+				unknownAtRules = "ignore",
+			},
+		},
+		scss = {
+			validate = true,
+			lint = {
+				unknownAtRules = "ignore",
+			},
 		},
 	},
 }

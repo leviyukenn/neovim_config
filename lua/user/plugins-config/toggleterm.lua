@@ -45,16 +45,19 @@ local lazygit = Terminal:new({
 })
 
 local ta = Terminal:new({
+	dir = "./",
 	direction = "float",
 	close_on_exit = true,
 })
 
 local tb = Terminal:new({
+	dir = "./",
 	direction = "vertical",
 	close_on_exit = true,
 })
 
 local tc = Terminal:new({
+	dir = "./",
 	direction = "horizontal",
 	close_on_exit = true,
 })

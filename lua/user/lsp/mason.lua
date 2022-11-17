@@ -10,7 +10,7 @@ local servers = {
 	"cssls",
 	"html",
 	"tsserver",
-	"pyright",
+	-- "pyright",
 	-- "bashls",
 	"jsonls",
 	-- "yamlls",
@@ -43,19 +43,36 @@ if not lspconfig_status_ok then
 end
 
 local opts = {}
-
 for _, server in pairs(servers) do
 	opts = {
-		on_attach = require("user.lsp.handlers").on_attach,
-		capabilities = require("user.lsp.handlers").capabilities,
+		on_attach = require("user.lsp.lsp-common-config").on_attach,
+		capabilities = require("user.lsp.lsp-common-config").capabilities,
 	}
 
 	server = vim.split(server, "@")[1]
 
-	local require_ok, conf_opts = pcall(require, "user.lsp.settings." .. server)
-	if require_ok then
-		opts = vim.tbl_deep_extend("force", conf_opts, opts)
+	local _, conf_opts = pcall(require, "user.lsp.settings." .. server)
+	if conf_opts ~= nil and type(conf_opts) == "table" then
+		-- 自定义初始化配置文件必须实现on_setup 方法
+		conf_opts.on_setup(lspconfig[server])
+	else
+		-- 使用默认参数
+		lspconfig[server].setup({ opts })
 	end
-
-	lspconfig[server].setup(opts)
 end
+
+-- for _, server in pairs(servers) do
+-- 	opts = {
+-- 		on_attach = require("lsp.handlers").on_attach,
+-- 		capabilities = require("lsp.handlers").capabilities,
+-- 	}
+--
+-- 	server = vim.split(server, "@")[1]
+--
+-- 	local require_ok, conf_opts = pcall(require, "lsp.settings." .. server)
+-- 	if require_ok then
+-- 		opts = vim.tbl_deep_extend("force", conf_opts, opts)
+-- 	end
+--
+-- 	lspconfig[server].setup(opts)
+-- end

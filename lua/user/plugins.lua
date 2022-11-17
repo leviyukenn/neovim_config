@@ -59,6 +59,7 @@ return packer.startup(function(use)
 	use("saadparwaiz1/cmp_luasnip") -- lua snippet completions
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-nvim-lua")
+	use("hrsh7th/cmp-nvim-lsp-signature-help") -- { name = 'nvim_lsp_signature_help' }
 
 	-- snippets
 	use("L3MON4D3/LuaSnip") --snippet engine
@@ -71,6 +72,12 @@ return packer.startup(function(use)
 	-- 下载和管理LSP servers
 	use("williamboman/mason.nvim") -- simple to use language server installer
 	use("williamboman/mason-lspconfig.nvim") -- simple to use language server installer
+
+	-- Lua 增强
+	use("folke/neodev.nvim")
+
+	-- JSON 增强
+	use("b0o/schemastore.nvim")
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
