@@ -14,6 +14,8 @@ toggleterm.setup({
 		end
 	end,
 	start_in_insert = true,
+	insert_mappings = false,
+	terminal_mappings = false,
 })
 
 local Terminal = require("toggleterm.terminal").Terminal

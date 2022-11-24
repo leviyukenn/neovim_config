@@ -75,3 +75,17 @@ autocmd("BufWrite", {
 	pattern = saveable_type,
 	command = "mkview",
 })
+
+-- 文件被外部程序改变后，自动重新加载文件
+autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+	group = myAutoGroup,
+	command = "if mode() != 'c' | checktime | endif",
+	pattern = { "*" },
+})
+
+-- 允许tsconfig.json里写Comment
+autocmd({ "BufNewFile", "BufRead" }, {
+	group = myAutoGroup,
+	pattern = { "tsconfig.json" },
+	command = "setlocal filetype=jsonc",
+})

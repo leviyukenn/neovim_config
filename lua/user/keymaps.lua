@@ -190,7 +190,7 @@ pluginKeys.mapCmp = function(cmp, luasnip, check_backspace)
 		-- Accept currently selected item. If none selected, `select` first item.
 		-- Set `select` to `false` to only confirm explicitly selected items.
 		-- 选中补全提示列表中的一项
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
 
 		-- 增强Tab功能，使之成为Super Tab
 		["<Tab>"] = cmp.mapping(function(fallback)
@@ -412,10 +412,10 @@ keymap("n", "<leader>bc", ":tabclose<CR>", opts)
 -- 特殊lazygit 窗口，需要安装lazygit
 -- <leader>tg lazygit
 pluginKeys.mapToggleTerm = function(toggleterm)
-	vim.keymap.set({ "n", "t" }, "<leader>t", toggleterm.toggleC)
-	vim.keymap.set({ "n", "t" }, "<leader>ta", toggleterm.toggleA)
-	vim.keymap.set({ "n", "t" }, "<leader>tb", toggleterm.toggleB)
-	vim.keymap.set({ "n", "t" }, "<leader>tg", toggleterm.toggleG)
+	vim.keymap.set({ "n" }, "<leader>t", toggleterm.toggleC)
+	vim.keymap.set({ "n" }, "<leader>ta", toggleterm.toggleA)
+	vim.keymap.set({ "n" }, "<leader>tb", toggleterm.toggleB)
+	vim.keymap.set({ "n" }, "<leader>tg", toggleterm.toggleG)
 end
 
 --todo-comments
