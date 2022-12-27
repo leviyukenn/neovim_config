@@ -15,6 +15,8 @@ local servers = {
 	"jsonls",
 	-- "yamlls",
 	"emmet_ls",
+	"tailwindcss",
+	"eslint",
 }
 
 local settings = {

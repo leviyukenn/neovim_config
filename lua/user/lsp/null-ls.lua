@@ -33,6 +33,7 @@ null_ls.setup({
 				"yaml",
 				"graphql",
 			},
+			timeout = 10000,
 			-- 求项目本地依赖 prettier 和 eslint，也就是说项目目录要有 package.json 并且 npm install -D prettier eslint 安装过依赖，才成功会格式化。
 			prefer_local = "node_modules/.bin",
 		}),
@@ -50,9 +51,9 @@ null_ls.setup({
 		-----------------------------------------------------
 		-- formatting.fixjson,
 		-- Diagnostics  ---------------------
-		diagnostics.eslint.with({
-			prefer_local = "node_modules/.bin",
-		}),
+		-- diagnostics.eslint.with({
+		-- 	prefer_local = "node_modules/.bin",
+		-- }),
 		-- diagnostics.markdownlint,
 		-- markdownlint-cli2
 		-- diagnostics.markdownlint.with({
@@ -63,9 +64,9 @@ null_ls.setup({
 		--
 		-- code actions ---------------------
 		code_actions.gitsigns,
-		code_actions.eslint.with({
-			prefer_local = "node_modules/.bin",
-		}),
+		-- code_actions.eslint.with({
+		-- 	prefer_local = "node_modules/.bin",
+		-- }),
 		-- 添加typescript的code_actions
 		-- Add Missing Imports
 		-- Fix All
