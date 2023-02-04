@@ -17,6 +17,7 @@ local servers = {
 	"emmet_ls",
 	"tailwindcss",
 	"eslint",
+	"rust_analyzer",
 }
 
 local settings = {
