@@ -49,6 +49,8 @@ null_ls.setup({
 		-- gem install rubocop
 		formatting.rubocop,
 		-----------------------------------------------------
+		-- rustfmt
+		formatting.rustfmt,
 		-- formatting.fixjson,
 		-- Diagnostics  ---------------------
 		-- diagnostics.eslint.with({
