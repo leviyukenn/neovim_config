@@ -6,7 +6,7 @@
 -- 比如lspconfig中的server名为cssls,而mason.nvim中的package名为css-lsp
 -- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 local servers = {
-	"sumneko_lua",
+	"lua_ls",
 	"cssls",
 	"html",
 	"tsserver",
@@ -18,6 +18,7 @@ local servers = {
 	"tailwindcss",
 	"eslint",
 	"rust_analyzer",
+	-- "ruby_ls",
 }
 
 local settings = {

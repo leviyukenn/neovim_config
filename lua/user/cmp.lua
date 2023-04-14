@@ -110,7 +110,7 @@ cmp.setup({
 	-- 下载了新的source插件后，需要在此引入
 	sources = {
 		{ name = "nvim_lsp" },
-		{ name = "nvim_lsp_signature_help" },
+		-- { name = "nvim_lsp_signature_help" },
 		{ name = "nvim_lua" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
